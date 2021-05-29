@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using KsiazkaAdresowa.Logging;
 
 namespace KsiazkaAdresowa.Controllers
 {
@@ -18,42 +21,71 @@ namespace KsiazkaAdresowa.Controllers
         private readonly DataContext _context;
         private readonly IDataRepository _repository;
         private readonly IDtoServiceInterface _dtoService;
+        private readonly ILogger<AboutModel> _logger;
 
-        public AddressBookController(DataContext context, IDataRepository repository, IDtoServiceInterface dtoServices )
+        public AddressBookController(DataContext context, IDataRepository repository, IDtoServiceInterface dtoServices, ILogger<AboutModel> logger)
         {
             _context = context;
             _repository = repository;
             _dtoService = dtoServices;
+            _logger = logger;
         }
         [HttpGet("Member/lastadded")]
         public async Task<ActionResult<AddressDto>> GetLastAddedPerson()
         {
-            return Ok(_dtoService.PersonIntoAddressDto(await _repository.GetLastAddedPerson()));
+            _logger.LogInformation(MyLogEvents.GetItem, "Getting item last added item");
+            var person = await _repository.GetLastAddedPerson();
+            if (person == null) {
+                _logger.LogInformation(MyLogEvents.GetItem, "Getting item last added item - not found any item");
+                return NotFound();
+            }
+            _logger.LogInformation(MyLogEvents.GetItem, "Getting item last added item, succeed");
+            return Ok(_dtoService.PersonIntoAddressDto(person));
         }
         [HttpGet("Members/city/{city}")]
         public async Task<ActionResult<IEnumerable<AddressDto>>> GetPeopleFromCity(string city)
         {
+            _logger.LogInformation(MyLogEvents.GetItem, "Getting people by city, they live in");
             var people = await _repository.GetUsersByCity(city);
             if (people.Count() == 0)
+            {
+                _logger.LogWarning(MyLogEvents.GetItem, "Getting people by city - not found any person");
                 return NotFound();
+            }
+            _logger.LogInformation(MyLogEvents.GetItem, "Getting people by city, they live in, succeed");
             return Ok(_dtoService.PersonsIntoAddressesDto(people));
         }
         [HttpGet("Member/login/{login}")]
         public async Task<ActionResult<AddressDto>> GetMember(string login)
         {
+            _logger.LogInformation(MyLogEvents.GetItem, "Downloading person by login");
             var member = await _repository.GetUser(login);
             if (member == null)
+            {
+                _logger.LogWarning(MyLogEvents.GetItemNotFound, "Downloading person by login, failed");
                 return NotFound();
+            }
+            _logger.LogInformation(MyLogEvents.GetItem, "Downloading person by login, succeed");
             return Ok(_dtoService.PersonIntoAddressDto(member));
         }
         [HttpGet("Members")]
-        public ActionResult<IEnumerable<AddressDto>> GetMembers()
+        public async Task<ActionResult<IEnumerable<AddressDto>>> GetMembers()
         {
-            return Ok(_dtoService.PersonsIntoAddressesDto(_repository.GetUsers().Result));
+            _logger.LogInformation(MyLogEvents.ListItems, "Downloading all data from db");
+            var people = await _repository.GetUsers();
+            if (people.Count() == 0)
+            {
+                _logger.LogWarning(MyLogEvents.GetItemNotFound, "Downloading data from db, failed");
+                return NotFound();
+            }
+            _logger.LogInformation(MyLogEvents.ListItems, "Downloading data from db, succeed");
+            return Ok(_dtoService.PersonsIntoAddressesDto(people));
         }
         [HttpPost]
         public async Task<ActionResult<Person>> AddMember(AddressDto address)
         {
+            _logger.LogInformation(MyLogEvents.InsertItem, "Adding item into db and file");
+
             if (ModelState.IsValid)
             {
                 var member = new Person
@@ -82,8 +114,10 @@ namespace KsiazkaAdresowa.Controllers
                 _context.Add(member);
                 await _context.SaveChangesAsync();
                 await SaveToFile(member);
+                _logger.LogInformation(MyLogEvents.InsertItem, "Adding item into db and file, succeed");
                 return member;
             }
+            _logger.LogWarning(MyLogEvents.InsertItem, "Adding item into db and file, occured error (ModelState wasn't valid)");
             return BadRequest("This was not a good reuest");
         }
 

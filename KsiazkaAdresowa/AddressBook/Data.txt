@@ -22,3 +22,27 @@ Street: pper, number: 999, 3
 Post office: Tersos, post code: 42-300
 Country: UnitedKingdom
 --------
+Type of application: NaturalPerson,
+First name: Kuchta,
+Last name: string
+Login: Kuch
+Time of adding: 29.05.2021 16:44:54
+Phone number: 723456789
+Email: w@weqwweq
+City: Tersus
+Street: DUPA, number: 1, 1
+Post office: Tersus, post code: 34-222
+Country: UnitedKingdom
+--------
+Type of application: NaturalPerson,
+First name: Kuchik,
+Last name: string
+Login: Kuch
+Time of adding: 29.05.2021 16:47:35
+Phone number: 572356789
+Email: w@sdsdf
+City: Tersus
+Street: DUPA, number: 1, 1
+Post office: Tersus, post code: 34-222
+Country: UnitedKingdom
+--------
