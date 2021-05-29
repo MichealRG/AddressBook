@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace KsiazkaAdresowa.Controllers
 {
@@ -30,9 +31,12 @@ namespace KsiazkaAdresowa.Controllers
             return Ok(_dtoService.PersonIntoAddressDto(await _repository.GetLastAddedPerson()));
         }
         [HttpGet("Members/city/{city}")]
-        public ActionResult<IEnumerable<AddressDto>> GetPeopleFromCity(string city)
+        public async Task<ActionResult<IEnumerable<AddressDto>>> GetPeopleFromCity(string city)
         {
-            return Ok(_dtoService.PersonsIntoAddressesDto(_repository.GetUsersByCity(city).Result));
+            var people = await _repository.GetUsersByCity(city);
+            if (people.Count() == 0)
+                return NotFound();
+            return Ok(_dtoService.PersonsIntoAddressesDto(people));
         }
         [HttpGet("Member/login/{login}")]
         public async Task<ActionResult<AddressDto>> GetMember(string login)
@@ -77,9 +81,28 @@ namespace KsiazkaAdresowa.Controllers
                 };
                 _context.Add(member);
                 await _context.SaveChangesAsync();
+                await SaveToFile(member);
                 return member;
             }
             return BadRequest("This was not a good reuest");
+        }
+
+        private async Task SaveToFile(Person member)
+        {
+            string lineToSave = $"Type of application: {member.TypeOfAppliciant},\n" +
+                $"First name: {member.FirstName},\n" +
+                $"Last name: {member.Surname}\n" +
+                $"Login: {member.Login}\n" +
+                $"Time of adding: {member.TimeOfAdding}\n" +
+                $"Phone number: {member.ContactData.PhoneNumber}\n" +
+                $"Email: {member.ContactData.Email}\n" +
+                $"City: {member.TeleAddressData.Home}\n" +
+                $"Street: {member.TeleAddressData.Street}, number: {member.TeleAddressData.NumberOfBuilding}, {member.TeleAddressData.NumberOfLocal}\n" +
+                $"Post office: {member.TeleAddressData.Post}, post code: {member.TeleAddressData.PostCode}\n" +
+                $"Country: {member.TeleAddressData.Country}\n" +
+                $"--------";
+            using StreamWriter file = new("AddressBook\\Data.txt", append: true);
+            await file.WriteLineAsync(lineToSave);
         }
     }
 }

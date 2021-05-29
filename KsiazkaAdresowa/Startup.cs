@@ -1,5 +1,6 @@
 using KsiazkaAdresowa.Data;
 using KsiazkaAdresowa.Extensions;
+using KsiazkaAdresowa.Migrations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -48,6 +49,8 @@ namespace KsiazkaAdresowa
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "KsiazkaAdresowa"));
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseRouting();
 

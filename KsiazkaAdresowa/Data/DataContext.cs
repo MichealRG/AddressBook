@@ -16,11 +16,11 @@ namespace KsiazkaAdresowa.Data
             modelBuilder.Entity<Person>()
                 .HasOne<ContactData>(p => p.ContactData)
                 .WithOne(cd => cd.PersonSource)
-                .HasForeignKey<ContactData>(cd => cd.PersonId);
+                .HasForeignKey<ContactData>(cd => cd.PersonId).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<Person>()
                 .HasOne<TeleAddress>(p => p.TeleAddressData)
                 .WithOne(ta => ta.PersonSource)
-                .HasForeignKey<TeleAddress>(ta => ta.PersonId).OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey<TeleAddress>(ta => ta.PersonId).OnDelete(DeleteBehavior.ClientCascade);
         }
         public DbSet<Person> Persons { get; set; }
         public DbSet<ContactData> ContactsData { get; set; }
