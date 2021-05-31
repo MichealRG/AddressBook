@@ -49,5 +49,10 @@ namespace KsiazkaAdresowa.Data
                 .Where(x=>x.TeleAddressData.Home==city)
                 .ToListAsync();
         }
+        public async Task AddMemberToDb(Person person)
+        {
+            _context.Persons.Add(person);
+            await _context.SaveChangesAsync();
+        }
     }
 }

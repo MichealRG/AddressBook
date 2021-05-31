@@ -37,5 +37,21 @@ namespace KsiazkaAdresowa.DTOs
         public string PostCode { get; set; }
         [Required]
         public Country Country { get; set; }
+        public override bool Equals(object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                AddressDto parsedObj = (AddressDto)obj;
+                return parsedObj.Country == Country && parsedObj.Email == Email && parsedObj.FirstName == FirstName
+                    && parsedObj.Home == Home && parsedObj.Login == Login && parsedObj.NumberOfBuilding == NumberOfBuilding &&
+                    parsedObj.NumberOfLocal == NumberOfLocal && parsedObj.PhoneNumber == PhoneNumber &&
+                    parsedObj.Post == Post && parsedObj.PostCode == PostCode && parsedObj.Street == Street &&
+                    parsedObj.Surname == Surname && parsedObj.TypeOfAppliciant == TypeOfAppliciant;
+            }
+        }
     }
 }

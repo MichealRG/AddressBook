@@ -12,6 +12,8 @@ namespace KsiazkaAdresowa.Interfaces
         public Task<Person> GetUser(string login);
         public Task<IEnumerable<Person>> GetUsersByCity(string city);
         public Task<Person> GetLastAddedPerson();
+        public Task AddMemberToDb(Person person);
+
 
     }
 }

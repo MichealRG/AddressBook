@@ -21,7 +21,7 @@ namespace KsiazkaAdresowa
             {
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<DataContext>();
-                
+                StartingData.Initialize(services);
             }
             host.Run();
         }

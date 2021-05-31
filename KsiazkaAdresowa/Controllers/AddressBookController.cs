@@ -18,14 +18,12 @@ namespace KsiazkaAdresowa.Controllers
     [ApiController]
     public class AddressBookController : Controller
     {
-        private readonly DataContext _context;
         private readonly IDataRepository _repository;
         private readonly IDtoServiceInterface _dtoService;
-        private readonly ILogger<AboutModel> _logger;
+        private readonly ILogger<AddressBookController> _logger;
 
-        public AddressBookController(DataContext context, IDataRepository repository, IDtoServiceInterface dtoServices, ILogger<AboutModel> logger)
+        public AddressBookController( IDataRepository repository, IDtoServiceInterface dtoServices, ILogger<AddressBookController> logger)
         {
-            _context = context;
             _repository = repository;
             _dtoService = dtoServices;
             _logger = logger;
@@ -66,14 +64,15 @@ namespace KsiazkaAdresowa.Controllers
                 return NotFound();
             }
             _logger.LogInformation(MyLogEvents.GetItem, "Downloading person by login, succeed");
-            return Ok(_dtoService.PersonIntoAddressDto(member));
+            var x = _dtoService.PersonIntoAddressDto(member);
+            return Ok(x);
         }
         [HttpGet("Members")]
         public async Task<ActionResult<IEnumerable<AddressDto>>> GetMembers()
         {
             _logger.LogInformation(MyLogEvents.ListItems, "Downloading all data from db");
             var people = await _repository.GetUsers();
-            if (people.Count() == 0)
+           if (people.Count() == 0)
             {
                 _logger.LogWarning(MyLogEvents.GetItemNotFound, "Downloading data from db, failed");
                 return NotFound();
@@ -111,9 +110,8 @@ namespace KsiazkaAdresowa.Controllers
                         PhoneNumber = address.PhoneNumber
                     }
                 };
-                _context.Persons.Add(member);
-                await _context.SaveChangesAsync();
-                await SaveToFile(member);
+                await _repository.AddMemberToDb(member);
+                //await SaveToFile(member);
                 _logger.LogInformation(MyLogEvents.InsertItem, "Adding item into db and file, succeed");
                 return member;
             }
@@ -135,7 +133,7 @@ namespace KsiazkaAdresowa.Controllers
                 $"Post office: {member.TeleAddressData.Post}, post code: {member.TeleAddressData.PostCode}\n" +
                 $"Country: {member.TeleAddressData.Country}\n" +
                 $"--------";
-            using StreamWriter file = new("AddressBook\\Data.txt", append: true);
+            using StreamWriter file = new("AddressBook\\Data.txt");
             await file.WriteLineAsync(lineToSave);
         }
     }
