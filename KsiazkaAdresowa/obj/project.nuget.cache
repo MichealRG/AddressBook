@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "KcQiwm+mOVHutBeoWk9Gp/wtvT+C70P8/Xa4Lcgvaw1DpxbKfzULoVegcIpXvMEpKL9WAYkhqKILLz9OqylGWA==",
+  "dgSpecHash": "f39n475xT3mSRONROnf2fMUTGYc/b7wztI6Yo9YV6hPMGNS1kZ29qTK6ewoVaFuH/edidL9dILRnvFL2v+H1Nw==",
   "success": true,
   "projectFilePath": "D:\\Paulpit2\\Work\\ksiazkaAdresowa\\KsiazkaAdresowa\\KsiazkaAdresowa\\KsiazkaAdresowa.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,7 @@
     "C:\\Users\\Michał\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.6\\microsoft.entityframeworkcore.abstractions.5.0.6.nupkg.sha512",
     "C:\\Users\\Michał\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.6\\microsoft.entityframeworkcore.analyzers.5.0.6.nupkg.sha512",
     "C:\\Users\\Michał\\.nuget\\packages\\microsoft.entityframeworkcore.design\\5.0.6\\microsoft.entityframeworkcore.design.5.0.6.nupkg.sha512",
+    "C:\\Users\\Michał\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\5.0.6\\microsoft.entityframeworkcore.inmemory.5.0.6.nupkg.sha512",
     "C:\\Users\\Michał\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.6\\microsoft.entityframeworkcore.relational.5.0.6.nupkg.sha512",
     "C:\\Users\\Michał\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\5.0.6\\microsoft.entityframeworkcore.sqlserver.5.0.6.nupkg.sha512",
     "C:\\Users\\Michał\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\5.0.6\\microsoft.entityframeworkcore.tools.5.0.6.nupkg.sha512",

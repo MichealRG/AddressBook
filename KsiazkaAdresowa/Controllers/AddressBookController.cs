@@ -111,7 +111,7 @@ namespace KsiazkaAdresowa.Controllers
                         PhoneNumber = address.PhoneNumber
                     }
                 };
-                _context.Add(member);
+                _context.Persons.Add(member);
                 await _context.SaveChangesAsync();
                 await SaveToFile(member);
                 _logger.LogInformation(MyLogEvents.InsertItem, "Adding item into db and file, succeed");

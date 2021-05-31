@@ -46,3 +46,111 @@ Street: DUPA, number: 1, 1
 Post office: Tersus, post code: 34-222
 Country: UnitedKingdom
 --------
+Type of application: NaturalPerson,
+First name: ,
+Last name: string
+Login: string
+Time of adding: 31.05.2021 10:59:00
+Phone number: 555555555
+Email: dupa@dupa
+City: string
+Street: string, number: 0, 0
+Post office: string, post code: 34-300
+Country: UnitedKingdom
+--------
+Type of application: NaturalPerson,
+First name: xD,
+Last name: string
+Login: string
+Time of adding: 31.05.2021 11:05:14
+Phone number: 555555555
+Email: string@w
+City: string
+Street: string, number: 0, 0
+Post office: string, post code: 34-300
+Country: UnitedKingdom
+--------
+Type of application: NaturalPerson,
+First name: SS,
+Last name: ss
+Login: ss
+Time of adding: 31.05.2021 11:11:01
+Phone number: 555555555
+Email: a@a
+City: s
+Street: ww, number: 1, 0
+Post office: 33-333, post code: 33-333
+Country: German
+--------
+Type of application: NaturalPerson,
+First name: s,
+Last name: s
+Login: s
+Time of adding: 31.05.2021 13:24:38
+Phone number: 555555555
+Email: a@a
+City: string
+Street: pop, number: 0, 0
+Post office: 31-111, post code: 31-111
+Country: UnitedKingdom
+--------
+Type of application: NaturalPerson,
+First name: s,
+Last name: s
+Login: s
+Time of adding: 31.05.2021 13:28:25
+Phone number: 555555555
+Email: a@a
+City: string
+Street: pop, number: 0, 0
+Post office: 31-111, post code: 31-111
+Country: UnitedKingdom
+--------
+Type of application: NaturalPerson,
+First name: w,
+Last name: w
+Login: s
+Time of adding: 31.05.2021 13:28:35
+Phone number: 555555555
+Email: a@a
+City: string
+Street: pop, number: 0, 0
+Post office: 31-111, post code: 31-111
+Country: UnitedKingdom
+--------
+Type of application: NaturalPerson,
+First name: w,
+Last name: w
+Login: s
+Time of adding: 31.05.2021 13:29:59
+Phone number: 555555555
+Email: a@a
+City: string
+Street: pop, number: 0, 0
+Post office: 31-111, post code: 31-111
+Country: UnitedKingdom
+--------
+Type of application: NaturalPerson,
+First name: string,
+Last name: string
+Login: string
+Time of adding: 31.05.2021 14:11:15
+Phone number: 555555555
+Email: string@s
+City: string
+Street: string, number: 0, 0
+Post office: string, post code: 34-300
+Country: UnitedKingdom
+--------
+Type of application: NaturalPerson,
+First name: striqeng,
+Last name: strqewing
+Login: strinqeg
+Time of adding: 31.05.2021 14:11:56
+Phone number: 555555555
+Email: strinsssg@s
+City: string
+Street: string, number: 0, 0
+Post office: string, post code: 34-300
+Country: UnitedKingdom
+--------

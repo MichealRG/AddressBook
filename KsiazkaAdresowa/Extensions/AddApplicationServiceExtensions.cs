@@ -20,7 +20,7 @@ namespace KsiazkaAdresowa.Extensions
             services.AddScoped<IDtoServiceInterface, DtoService>();
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlServer(config.GetConnectionString("AddressBookDatabase"));
+                options.UseInMemoryDatabase(databaseName: "AddressBook");
             });
             return services;
         }
